@@ -1,0 +1,11 @@
+<h2>API Demo</h2>
+<p>Test our connection to the backend API.</p>
+<p>You should see an interesting fact about cats below.</p>
+
+<p *ngIf="hasFact$ | async; else notLoaded">Quote: <b>{{fact$ | async}}</b></p>
+
+<ng-template #notLoaded>
+  <p>Loading...</p>
+</ng-template>
+
+<p>Go to <a [routerLink]="['/']">top</a>.</p>

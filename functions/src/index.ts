@@ -1,9 +1,23 @@
 import * as functions from "firebase-functions";
+import * as express from 'express';
+import * as cors from 'cors';
+import axios from 'axios';
 
-// Start writing Firebase Functions
-// https://firebase.google.com/docs/functions/typescript
+const app = express();
 
-export const helloWorld = functions.https.onRequest((request, response) => {
-  functions.logger.info("Hello logs!", {structuredData: true});
-  response.send("Hello from Firebase!");
+app.use(cors());
+
+/**
+ * When accessing via localhost, need to add a CORS header.
+ */
+const localhostApiPort = '4200';
+
+export const cats = functions.https.onRequest(async (request, response) => {
+  try {
+    const resp = await axios.get('https://catfact.ninja/fact');
+    response.set('Access-Control-Allow-Origin', `http://localhost:${localhostApiPort}`);
+    response.status(200).json(resp.data);
+  } catch (error) {
+    response.status(400).json(`{error: ${error}}`);
+  }
 });
