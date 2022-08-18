@@ -12,6 +12,4 @@ import {CommonModule} from "@angular/common";
     RouterModule,
   ],
 })
-export class AppComponent {
-  title = 'supertokens-demo-1';
-}
+export class AppComponent {}
