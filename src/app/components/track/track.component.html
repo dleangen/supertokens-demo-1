@@ -1,0 +1,37 @@
+<h2>Track your cats</h2>
+<p>You can use our connection to Firestore to track all your felines.</p>
+<p>You should see a list of cats below that matches the data in Firestore.</p>
+
+<ul *ngIf="hasCats$ | async; else noItems">
+  <li *ngFor="let item of cats$ | async">{{item.name}}</li>
+</ul>
+
+<ng-template #noItems>
+  <p>No cats yet. You must be very lonely...</p>
+</ng-template>
+
+<div class="input">
+  <h3>Adopt a Cat</h3>
+  <form [formGroup]="form" (ngSubmit)="onAdopt(form)" class="form" >
+
+    <mat-form-field class="input__form--textarea" appearance="fill">
+      <mat-label>Cat's name</mat-label>
+      <input matInput name="name" formControlName="name">
+    </mat-form-field>
+
+    <mat-form-field class="input__form--textarea" appearance="fill">
+      <mat-label>Describe your cat</mat-label>
+      <textarea matInput cdkTextareaAutosize name="description" formControlName="description"></textarea>
+    </mat-form-field>
+
+    <button
+      type="submit"
+      mat-raised-button
+      color="primary"
+      [disabled]="false">Adopt</button>
+    <button
+      type="reset"
+      mat-raised-button
+      (click)="onCancel()">Abort</button>
+  </form>
+</div>

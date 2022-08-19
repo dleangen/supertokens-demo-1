@@ -1,1 +1,43 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$dark-primary-text: rgba(black, 0.87);
+$light-primary-text: white;
+
+$primary-palette: mat.define-palette(mat.$pink-palette);
+$accent-palette: mat.define-palette(mat.$blue-gray-palette);
+$warn-palette: mat.define-palette(mat.$red-palette);
+
+$app-theme: mat.define-light-theme(
+    (color: (
+      primary: $primary-palette,
+      accent: $accent-palette,
+      warn: $warn-palette,
+    )));
+
+@include mat.all-component-themes($app-theme);
+
+$primary-color: mat.get-color-from-palette($primary-palette);
+$text-on-primary: mat.get-contrast-color-from-palette($primary-palette, 400);
+$primary-background-color: mat.get-color-from-palette($primary-palette, 50);
+$text-on-primary-background: mat.get-contrast-color-from-palette($primary-palette, 50);
+$accent-color: mat.get-color-from-palette($accent-palette);
+
+html, body {
+  height: 100%;
+  --primary-color: #{$primary-color};
+  --text-on-primary: #{$text-on-primary};
+  --primary-background-color: #{$primary-background-color};
+  --text-on-primary-background: #{$text-on-primary-background};
+  --accent-color: #{$accent-color};
+  --text-on-accent: #{mat.get-contrast-color-from-palette($accent-palette, 400)};
+  --accent-background-color: #{mat.get-color-from-palette($accent-palette, 50)};
+  --text-on-accent-background: #{mat.get-contrast-color-from-palette($accent-palette, 50)};
+  --warn-color: #{mat.get-color-from-palette($warn-palette)};
+  --text-on-warn: #{mat.get-contrast-color-from-palette($warn-palette, 400)};
+  --warn-background-color: #{mat.get-color-from-palette($warn-palette, 50)};
+  --text-on-warn-background: #{mat.get-contrast-color-from-palette($warn-palette, 50)};
+}
+
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

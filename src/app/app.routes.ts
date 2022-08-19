@@ -1,7 +1,7 @@
 import {Routes} from "@angular/router";
 import {PageNotFoundComponent} from "./components/page-not-found/page-not-found.component";
 import {HomeComponent} from "./components/home/home.component";
-import {ItemsComponent} from "./components/items/items.component";
+import {TrackComponent} from "./components/track/track.component";
 import {CatsComponent} from "./components/cats/cats.component";
 
 export const APP_ROUTES: Routes  = [
@@ -10,11 +10,11 @@ export const APP_ROUTES: Routes  = [
     component: HomeComponent,
   },
   {
-    path: 'items',
-    component: ItemsComponent,
+    path: 'track',
+    component: TrackComponent,
   },
   {
-    path: 'cats',
+    path: 'learn',
     component: CatsComponent,
   },
   {

@@ -1,11 +1,14 @@
-<h2>API Demo</h2>
-<p>Test our connection to the backend API.</p>
+<h2>Learn about cats as we test the backend API</h2>
+
+<p>
+  From here, we can test our connection to the backend API.
+  The API is but a simply proxy to the <a href="https://catfact.ninja">Cat Fact API</a>.
+</p>
+
 <p>You should see an interesting fact about cats below.</p>
 
-<p *ngIf="hasFact$ | async; else notLoaded">Quote: <b>{{fact$ | async}}</b></p>
+<p *ngIf="hasFact$ | async; else notLoaded">Fact: <b>{{fact$ | async}}</b></p>
 
 <ng-template #notLoaded>
   <p>Loading...</p>
 </ng-template>
-
-<p>Go to <a [routerLink]="['/']">top</a>.</p>

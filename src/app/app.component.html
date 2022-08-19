@@ -1,7 +1,18 @@
-<h1>SuperTokens Demo Application</h1>
-<p>
-  The purpose of this demo is to show how to use SuperTokens with
-  Angular and Firebase.
-</p>
-<hr/>
+<header>
+  <mat-toolbar>
+    <span>
+      <a [routerLink]="['/']"><img class="logo" src="assets/cat-logo.png"></a>
+      <span>SuperTokens Cat Tracker Demo</span>
+    </span>
+    <span>Welcome!</span>
+  </mat-toolbar>
+</header>
+<main>
 <router-outlet></router-outlet>
+</main>
+<footer>
+  <p>
+    The purpose of this demo is to show how to use SuperTokens with
+    Angular and Firebase.
+  </p>
+</footer>

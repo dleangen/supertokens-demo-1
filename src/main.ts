@@ -18,7 +18,7 @@ if (environment.production) {
 
 bootstrapApplication(AppComponent, {
   providers: [
-    importProvidersFrom(RouterModule.forRoot(APP_ROUTES), BrowserAnimationsModule, HttpClientModule),
+    importProvidersFrom(RouterModule.forRoot(APP_ROUTES), BrowserAnimationsModule, HttpClientModule, BrowserAnimationsModule),
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
     importProvidersFrom(
       provideFirebaseApp(() => initializeApp(environment.firebase)),
