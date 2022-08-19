@@ -3,6 +3,7 @@ import {PageNotFoundComponent} from "./components/page-not-found/page-not-found.
 import {HomeComponent} from "./components/home/home.component";
 import {TrackComponent} from "./components/track/track.component";
 import {CatsComponent} from "./components/cats/cats.component";
+import {SignInComponent} from "./components/signin/signin.component";
 
 export const APP_ROUTES: Routes  = [
   {
@@ -16,6 +17,10 @@ export const APP_ROUTES: Routes  = [
   {
     path: 'learn',
     component: CatsComponent,
+  },
+  {
+    path: 'auth',
+    component: SignInComponent,
   },
   {
     path: '**',
