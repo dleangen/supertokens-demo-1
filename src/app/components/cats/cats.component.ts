@@ -3,6 +3,7 @@ import {CatFactsService} from "../../services/cat-facts.service";
 import {map, Observable} from "rxjs";
 import {CommonModule} from "@angular/common";
 import {RouterModule} from "@angular/router";
+import {SuperTokensAuthService} from "../../services/supertokens-auth.service";
 
 @Component({
   selector: 'app-cats',
@@ -16,10 +17,15 @@ import {RouterModule} from "@angular/router";
 })
 export class CatsComponent implements OnInit {
 
+  isAuthenticated$: Observable<boolean>;
   fact$!: Observable<string>;
   hasFact$!: Observable<boolean>;
 
-  constructor(private cats: CatFactsService) { }
+  constructor(
+    private cats: CatFactsService,
+    private auth: SuperTokensAuthService) {
+    this.isAuthenticated$ = auth.isAuthenticated$;
+  }
 
   ngOnInit(): void {
     this.fact$ = this.cats.getFact();

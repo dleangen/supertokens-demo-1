@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {RouterModule} from "@angular/router";
 import {CatsService} from "../../services/cats.service";
@@ -7,6 +7,7 @@ import {Cat} from "../../model/cat";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
+import {SuperTokensAuthService} from "../../services/supertokens-auth.service";
 
 interface CatForm {
   name: FormControl<string>;
@@ -28,6 +29,7 @@ interface CatForm {
 })
 export class TrackComponent implements OnInit {
 
+  isAuthenticated$: Observable<boolean>;
   cats$!: Observable<Cat[]>;
   hasCats$!: Observable<boolean>
 
@@ -38,7 +40,11 @@ export class TrackComponent implements OnInit {
     }
   );
 
-  constructor(private cats: CatsService) { }
+  constructor(
+    private cats: CatsService,
+    private auth: SuperTokensAuthService) {
+    this.isAuthenticated$ = auth.isAuthenticated$;
+  }
 
   ngOnInit(): void {
     this.cats$ = this.cats.get();

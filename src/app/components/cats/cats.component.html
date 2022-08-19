@@ -5,10 +5,16 @@
   The API is but a simply proxy to the <a href="https://catfact.ninja">Cat Fact API</a>.
 </p>
 
-<p>You should see an interesting fact about cats below.</p>
+<div *ngIf="isAuthenticated$ | async; else notAuthenticated">
+  <p>You should see an interesting fact about cats below.</p>
 
-<p *ngIf="hasFact$ | async; else notLoaded">Fact: <b>{{fact$ | async}}</b></p>
+  <p *ngIf="hasFact$ | async; else notLoaded">Fact: <b>{{fact$ | async}}</b></p>
 
-<ng-template #notLoaded>
-  <p>Loading...</p>
+  <ng-template #notLoaded>
+    <p>Loading...</p>
+  </ng-template>
+</div>
+
+<ng-template #notAuthenticated>
+  <p>Please <a [routerLink]="['/auth']">sign in</a> to see some fascinating facts about cats.</p>
 </ng-template>
