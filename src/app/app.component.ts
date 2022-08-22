@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {RouterModule} from "@angular/router";
 import {CommonModule} from "@angular/common";
-import {MatToolbarModule} from "@angular/material/toolbar";
+import {HeaderComponent} from "./components/header/header.component";
 
 @Component({
   selector: 'app-root',
@@ -10,8 +10,8 @@ import {MatToolbarModule} from "@angular/material/toolbar";
   standalone: true,
   imports: [
     CommonModule,
+    HeaderComponent,
     RouterModule,
-    MatToolbarModule,
   ],
 })
 export class AppComponent {}

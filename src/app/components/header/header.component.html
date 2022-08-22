@@ -1,0 +1,11 @@
+<mat-toolbar *ngIf="notSigninPage">
+    <span>
+      <a [routerLink]="['/']"><img class="logo" src="assets/cat-logo.png"></a>
+      <span>SuperTokens Cat Tracker Demo</span>
+    </span>
+  <span *ngIf="isAuthenticated$ | async" class="header__authenticated">
+    <span class="header__authenticated--item">Welcome!</span>
+    <span class="header__authenticated--item"><button mat-button (click)="onSignOut()">Sign Out</button></span>
+  </span>
+  <span *ngIf="notAuthenticated$ | async"><button mat-button [routerLink]="['/auth']">Sign In</button></span>
+</mat-toolbar>
