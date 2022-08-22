@@ -1,7 +1,11 @@
 import {apiDomain, websiteDomain} from "../config";
 import Session from "supertokens-node/recipe/session";
-import ThirdPartyEmailPassword from "supertokens-node/recipe/thirdpartyemailpassword";
 import {TypeInput} from "supertokens-node/types";
+import ThirdPartyEmailPassword from "supertokens-node/recipe/thirdpartyemailpassword";
+import {emailPasswordSignUpPOST} from "./email-password-signup-handler";
+import {thirdPartySignInUpPOST} from "./third-party-signinup-handler";
+import {createNewSession} from "./create-new-session-handler";
+import {signOutPOST} from "./sign-out-handler";
 const { Google, Github } = ThirdPartyEmailPassword;
 
 export const SuperTokensInitConfig: TypeInput = {
@@ -40,64 +44,8 @@ export const SuperTokensInitConfig: TypeInput = {
         apis: (originalImplementation) => {
           return {
             ...originalImplementation,
-
-            // override the email password sign up API
-            emailPasswordSignUpPOST: async function(input) {
-              if (originalImplementation.emailPasswordSignUpPOST === undefined) {
-                throw Error("Should never come here");
-              }
-
-              // TODO: some pre sign up logic
-
-              let response = await originalImplementation.emailPasswordSignUpPOST(input);
-
-              if (response.status === "OK") {
-                // TODO: some post sign up logic
-              }
-
-              return response;
-            },
-
-            // override the email password sign in API
-            emailPasswordSignInPOST: async function(input) {
-              if (originalImplementation.emailPasswordSignInPOST === undefined) {
-                throw Error("Should never come here");
-              }
-
-              // TODO: some pre sign in logic
-
-              let response = await originalImplementation.emailPasswordSignInPOST(input);
-
-              if (response.status === "OK") {
-                // TODO: some post sign in logic
-              }
-
-              return response;
-            },
-
-            // override the thirdparty sign in / up API
-            thirdPartySignInUpPOST: async function(input) {
-              if (originalImplementation.thirdPartySignInUpPOST === undefined) {
-                throw Error("Should never come here");
-              }
-
-              // TODO: Some pre sign in / up logic
-
-              let response = await originalImplementation.thirdPartySignInUpPOST(input);
-
-              if (response.status === "OK") {
-                if (response.createdNewUser) {
-                  // TODO: some post sign up logic
-                  console.log('New user was created', response);
-                } else {
-                  // TODO: some post sign in logic
-                  // response.custom_token = 'This is my custom token, yay!';
-                  console.log('New user was signed in', response);
-                }
-              }
-
-              return response;
-            },
+            emailPasswordSignUpPOST: emailPasswordSignUpPOST(originalImplementation),
+            thirdPartySignInUpPOST: thirdPartySignInUpPOST(originalImplementation),
           }
         },
       },
@@ -105,27 +53,15 @@ export const SuperTokensInitConfig: TypeInput = {
     Session.init({
       override: {
         functions: function (originalImplementation) {
-          console.log('Overloading createNewSession');
           return {
             ...originalImplementation,
-            createNewSession: async function (input) {
-              console.log('createNewSession')
-              return originalImplementation.createNewSession(input);
-            },
-            refreshSession: async function (input) {
-              let session = originalImplementation.refreshSession(input);
-              console.log('refreshSession')
-              return session;
-            }
+            createNewSession: createNewSession(originalImplementation),
           };
         },
         apis: (originalImplementation) => {
           return {
             ...originalImplementation,
-            signOutPOST: async function (input) {
-              console.log('signOutPOST')
-              return originalImplementation.signOutPOST!(input);
-            },
+            signOutPOST: signOutPOST(originalImplementation),
           }
         },
       },

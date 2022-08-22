@@ -34,6 +34,7 @@ const initSuperTokens = () => {
       apiGatewayPath: '/supertokens-demo-20220805/us-central1',
     },
     recipeList: [Session.init()],
+    enableDebugLogs: false,
   });
 }
 
