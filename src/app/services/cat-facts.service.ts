@@ -15,7 +15,7 @@ export class CatFactsService {
   constructor(private http: HttpClient) { }
 
   getFact(): Observable<string> {
-    return this.http.get<Fact>('http://localhost:5001/supertokens-demo-20220805/us-central1/cats')
+    return this.http.get<Fact>('http://localhost:5001/supertokens-demo-20220805/us-central1/cats/fact')
       .pipe(
         map((result: any) => result.fact),
         first(),

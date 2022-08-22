@@ -22,7 +22,13 @@ export const APP_ROUTES: Routes  = [
   },
   {
     path: 'auth',
-    component: SignInComponent,
+    title: 'SuperTokens Demo – Sign In',
+    children: [
+      {
+        path: '**',
+        component: SignInComponent,
+      },
+    ],
   },
   {
     path: 'secret',

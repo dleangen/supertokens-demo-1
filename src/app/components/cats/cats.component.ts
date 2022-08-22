@@ -24,6 +24,7 @@ export class CatsComponent implements OnInit {
   constructor(
     private cats: CatFactsService,
     private auth: SuperTokensAuthService) {
+    auth.checkForSession();
     this.isAuthenticated$ = auth.isAuthenticated$;
   }
 
