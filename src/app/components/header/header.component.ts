@@ -46,7 +46,6 @@ export class HeaderComponent implements OnInit {
   }
 
   async onSignOut(): Promise<void> {
-    console.log('Sign Out');
     await this.auth.signOut();
     this.router.navigate(['/auth']);
   }

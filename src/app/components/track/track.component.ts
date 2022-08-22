@@ -8,6 +8,9 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import {SuperTokensAuthService} from "../../services/supertokens-auth.service";
+import {CatFactsService} from "../../services/cat-facts.service";
+import {HttpClient} from "@angular/common/http";
+import {HttpFetchBackend} from "../../services/http-fetch-backend.service";
 
 interface CatForm {
   name: FormControl<string>;

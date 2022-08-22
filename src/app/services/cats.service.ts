@@ -4,7 +4,7 @@ import {Observable} from "rxjs";
 import {Cat} from "../model/cat";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CatsService {
 

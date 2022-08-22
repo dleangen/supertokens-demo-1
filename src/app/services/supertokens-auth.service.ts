@@ -22,8 +22,8 @@ export class SuperTokensAuthService {
     return doesSuperTokensSessionExist;
   }
 
-  signOut(): Promise<void> {
-    return Session.signOut()
-      .then(() => this.hasSessionSubject.next(false));
+  async signOut(): Promise<void> {
+    await Session.signOut();
+    this.hasSessionSubject.next(false);
   }
 }

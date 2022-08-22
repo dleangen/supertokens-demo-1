@@ -5,10 +5,12 @@ import * as cors from 'cors';
 import SuperTokens from 'supertokens-node';
 import {SuperTokensInitConfig} from "./auth/super-tokens-init-config";
 import {websiteDomain} from './config';
+import * as admin from 'firebase-admin';
 
 SuperTokens.init(SuperTokensInitConfig);
 
 const app = express();
+admin.initializeApp();
 
 app.use(
   cors({
